@@ -1,15 +1,516 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/heart.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <meta name="theme-color" content="#fce7f3" />
-    <title>Happy Birthday, Kharin Nova! 💕</title>
-    <meta name="description" content="A special birthday gift for you, my love." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, Kharin Nova! 💖</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ["Quicksand", "sans-serif"],
+            },
+            colors: {
+              pastel: {
+                pink: "#FFE4E1",
+                rose: "#F4C2C2",
+                beige: "#F5F5DC",
+                lilac: "#E6E6FA",
+                text: "#5B3E42",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background-color: #fff9fa;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* Custom Animations */
+      .fade-in {
+        animation: fadeIn 0.8s ease-in-out forwards;
+        opacity: 0;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      /* Polaroid Effect */
+      .polaroid {
+        background: white;
+        padding: 0.75rem 0.75rem 2.5rem 0.75rem;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: 4px;
+        transition: transform 0.3s ease;
+      }
+
+      .polaroid:nth-child(odd) {
+        transform: rotate(-2deg);
+      }
+      .polaroid:nth-child(even) {
+        transform: rotate(2deg);
+      }
+      .polaroid:hover {
+        transform: scale(1.05) rotate(0deg);
+        z-index: 10;
+      }
+
+      /* Hide scrollbar for clean app look */
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="font-sans text-pastel-text min-h-screen relative pb-24">
+    <!-- App Container (Max width for desktop, full for mobile) -->
+    <main
+      class="max-w-md mx-auto min-h-screen relative shadow-2xl bg-[#FFF9FA] overflow-x-hidden"
+    >
+      <!-- ================= TAB 1: HOME ================= -->
+      <section
+        id="tab-home"
+        class="min-h-screen flex flex-col items-center justify-center p-6 text-center tab-content relative"
+      >
+        <div class="floating text-pink-400 mb-6">
+          <i data-lucide="heart" class="w-16 h-16 fill-pink-400"></i>
+        </div>
+
+        <h1
+          class="font-serif text-4xl md:text-5xl font-semibold text-rose-800 mb-4 fade-in"
+          style="animation-delay: 0.2s"
+        >
+          Happy Birthday,<br />Kharin Nova!
+        </h1>
+
+        <p
+          class="text-lg text-rose-600 mb-10 fade-in"
+          style="animation-delay: 0.4s"
+        >
+          Hari ini adalah tentangmu. Sebuah perjalanan kecil sudah aku siapkan
+          khusus untuk merayakan hari spesialmu.
+        </p>
+
+        <button
+          onclick="switchTab('tab-memories')"
+          class="fade-in bg-rose-400 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-rose-500 hover:shadow-xl transition-all duration-300 flex items-center gap-2 active:scale-95"
+          style="animation-delay: 0.6s"
+        >
+          Mulai Perjalanan
+          <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </button>
+      </section>
+
+      <!-- ================= TAB 2: OUR MEMORIES ================= -->
+      <section
+        id="tab-memories"
+        class="min-h-screen hidden flex-col p-6 tab-content bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNGRUUyRTIiLz48L3N2Zz4=')]"
+      >
+        <h2
+          class="font-serif text-3xl font-semibold text-center text-rose-800 mt-8 mb-2"
+        >
+          Our Memories
+        </h2>
+        <p class="text-center text-rose-600 mb-8 text-sm">
+          Beberapa momen manis yang selalu aku ingat...
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 pb-10">
+          <!-- Foto 1 -->
+          <div class="polaroid fade-in relative">
+            <!-- GANTI src DI BAWAH DENGAN FOTO ASLI -->
+            <img
+              src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=400&auto=format&fit=crop"
+              alt="Memory 1"
+              class="w-full h-32 object-cover rounded-sm mb-2"
+            />
+            <p
+              class="text-center text-xs font-serif italic text-gray-600 absolute bottom-3 w-[calc(100%-1.5rem)]"
+            >
+              Kencan pertama kita
+            </p>
+          </div>
+          <!-- Foto 2 -->
+          <div class="polaroid fade-in" style="animation-delay: 0.2s">
+            <img
+              src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=400&auto=format&fit=crop"
+              alt="Memory 2"
+              class="w-full h-32 object-cover rounded-sm mb-2"
+            />
+            <p
+              class="text-center text-xs font-serif italic text-gray-600 absolute bottom-3 w-[calc(100%-1.5rem)]"
+            >
+              Senyum paling manis
+            </p>
+          </div>
+          <!-- Foto 3 -->
+          <div class="polaroid fade-in" style="animation-delay: 0.3s">
+            <img
+              src="https://images.unsplash.com/photo-1516589178581-6cd78539ce18?q=80&w=400&auto=format&fit=crop"
+              alt="Memory 3"
+              class="w-full h-32 object-cover rounded-sm mb-2"
+            />
+            <p
+              class="text-center text-xs font-serif italic text-gray-600 absolute bottom-3 w-[calc(100%-1.5rem)]"
+            >
+              Liburan dadakan
+            </p>
+          </div>
+          <!-- Foto 4 -->
+          <div class="polaroid fade-in" style="animation-delay: 0.4s">
+            <img
+              src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop"
+              alt="Memory 4"
+              class="w-full h-32 object-cover rounded-sm mb-2"
+            />
+            <p
+              class="text-center text-xs font-serif italic text-gray-600 absolute bottom-3 w-[calc(100%-1.5rem)]"
+            >
+              Hari ini & seterusnya
+            </p>
+          </div>
+        </div>
+
+        <div class="flex justify-center mt-auto mb-6">
+          <button
+            onclick="switchTab('tab-quest')"
+            class="bg-pastel-lilac text-rose-800 px-6 py-2 rounded-full font-medium shadow-md hover:shadow-lg transition-all flex items-center gap-2 active:scale-95"
+          >
+            Lanjut ke Kado <i data-lucide="gift" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= TAB 3: THE GIFT QUEST ================= -->
+      <section
+        id="tab-quest"
+        class="min-h-screen hidden flex-col p-6 tab-content"
+      >
+        <div class="text-center mt-8 mb-10">
+          <div
+            class="inline-block p-3 bg-rose-100 rounded-full mb-3 text-rose-500"
+          >
+            <i data-lucide="map" class="w-8 h-8"></i>
+          </div>
+          <h2 class="font-serif text-3xl font-semibold text-rose-800">
+            The Gift Quest
+          </h2>
+          <p class="text-rose-600 text-sm mt-2">
+            Ikuti petunjuk ini untuk menemukan kado ulang tahunmu!
+          </p>
+        </div>
+
+        <!-- Timeline Container -->
+        <div class="relative border-l-2 border-rose-200 ml-4 space-y-8 pb-10">
+          <!-- Step 1 -->
+          <div class="relative pl-6 fade-in quest-step" id="step-1">
+            <div
+              class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-rose-400 ring-4 ring-[#FFF9FA] step-dot transition-colors"
+            ></div>
+            <h3
+              class="font-bold text-lg text-rose-800 step-title transition-all"
+            >
+              Langkah 1: Cek Bantal
+            </h3>
+            <p class="text-sm text-gray-600 mb-3">
+              Coba intip ke bawah bantal tempat tidurmu, ada sesuatu yang aku
+              selipkan di sana.
+            </p>
+            <button
+              onclick="markDone('step-1')"
+              class="text-xs bg-white border border-rose-200 text-rose-500 px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm active:scale-95 transition-all"
+            >
+              <i data-lucide="circle" class="w-3 h-3 btn-icon"></i>
+              <span class="btn-text">Tandai Selesai</span>
+            </button>
+          </div>
+
+          <!-- Step 2 -->
+          <div
+            class="relative pl-6 fade-in quest-step"
+            id="step-2"
+            style="animation-delay: 0.2s"
+          >
+            <div
+              class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-[#FFF9FA] step-dot transition-colors"
+            ></div>
+            <h3
+              class="font-bold text-lg text-rose-800 step-title transition-all"
+            >
+              Langkah 2: Surat Biru
+            </h3>
+            <p class="text-sm text-gray-600 mb-3">
+              Baca surat berwarna biru muda itu dulu ya sebelum lanjut ke tahap
+              akhir.
+            </p>
+            <button
+              onclick="markDone('step-2')"
+              class="text-xs bg-white border border-rose-200 text-rose-500 px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm active:scale-95 transition-all opacity-50 pointer-events-none btn-action"
+            >
+              <i data-lucide="circle" class="w-3 h-3 btn-icon"></i>
+              <span class="btn-text">Tandai Selesai</span>
+            </button>
+          </div>
+
+          <!-- Step 3 -->
+          <div
+            class="relative pl-6 fade-in quest-step"
+            id="step-3"
+            style="animation-delay: 0.4s"
+          >
+            <div
+              class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-[#FFF9FA] step-dot transition-colors"
+            ></div>
+            <h3
+              class="font-bold text-lg text-rose-800 step-title transition-all"
+            >
+              Langkah 3: Kotak Kado!
+            </h3>
+            <p class="text-sm text-gray-600 mb-3">
+              Sekarang buka laci meja belajarmu, kado utamanya ada di situ.
+              Happy Birthday, Sayang! 🎉
+            </p>
+            <button
+              onclick="markDone('step-3')"
+              class="text-xs bg-white border border-rose-200 text-rose-500 px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm active:scale-95 transition-all opacity-50 pointer-events-none btn-action"
+            >
+              <i data-lucide="circle" class="w-3 h-3 btn-icon"></i>
+              <span class="btn-text">Tandai Selesai</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BOTTOM NAVIGATION ================= -->
+      <nav
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-rose-50 px-6 py-3 flex gap-8 z-50"
+      >
+        <button
+          onclick="switchTab('tab-home')"
+          class="nav-btn flex flex-col items-center gap-1 text-rose-400 active-nav transition-colors"
+          data-target="tab-home"
+        >
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span class="text-[10px] font-medium">Home</span>
+        </button>
+        <button
+          onclick="switchTab('tab-memories')"
+          class="nav-btn flex flex-col items-center gap-1 text-gray-400 hover:text-rose-300 transition-colors"
+          data-target="tab-memories"
+        >
+          <i data-lucide="image" class="w-5 h-5"></i>
+          <span class="text-[10px] font-medium">Memories</span>
+        </button>
+        <button
+          onclick="switchTab('tab-quest')"
+          class="nav-btn flex flex-col items-center gap-1 text-gray-400 hover:text-rose-300 transition-colors"
+          data-target="tab-quest"
+        >
+          <i data-lucide="gift" class="w-5 h-5"></i>
+          <span class="text-[10px] font-medium">Quest</span>
+        </button>
+      </nav>
+    </main>
+
+    <!-- Script Logic -->
+    <script>
+      // Initialize Icons
+      lucide.createIcons();
+
+      // Fire Confetti on Load
+      window.onload = () => {
+        const duration = 3 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = {
+          startVelocity: 30,
+          spread: 360,
+          ticks: 60,
+          zIndex: 0,
+        };
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function () {
+          const timeLeft = animationEnd - Date.now();
+
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+
+          const particleCount = 50 * (timeLeft / duration);
+          confetti(
+            Object.assign({}, defaults, {
+              particleCount,
+              origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+              colors: ["#ffb6c1", "#ff69b4", "#ffe4e1"],
+            }),
+          );
+          confetti(
+            Object.assign({}, defaults, {
+              particleCount,
+              origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+              colors: ["#ffb6c1", "#ff69b4", "#ffe4e1"],
+            }),
+          );
+        }, 250);
+      };
+
+      // Tab Switching Logic
+      function switchTab(tabId) {
+        // Hide all tabs
+        document.querySelectorAll(".tab-content").forEach((tab) => {
+          tab.classList.add("hidden");
+          tab.classList.remove("flex");
+        });
+
+        // Show selected tab
+        const activeTab = document.getElementById(tabId);
+        activeTab.classList.remove("hidden");
+        activeTab.classList.add("flex");
+
+        // Update bottom nav styling
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          if (btn.dataset.target === tabId) {
+            btn.classList.remove("text-gray-400");
+            btn.classList.add("text-rose-400");
+          } else {
+            btn.classList.add("text-gray-400");
+            btn.classList.remove("text-rose-400");
+          }
+        });
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+
+        // Re-fire confetti if Quest tab is opened
+        if (tabId === "tab-quest") {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ["#ffb6c1", "#ff69b4"],
+          });
+        }
+      }
+
+      // Quest Checkbox Logic
+      function markDone(stepId) {
+        const stepContainer = document.getElementById(stepId);
+        const dot = stepContainer.querySelector(".step-dot");
+        const title = stepContainer.querySelector(".step-title");
+        const btn = stepContainer.querySelector("button");
+        const btnText = btn.querySelector(".btn-text");
+        const btnIcon = btn.querySelector(".btn-icon");
+
+        // Change Styles to "Done"
+        dot.classList.remove("bg-rose-400");
+        dot.classList.add("bg-green-400");
+
+        title.classList.add("line-through", "text-gray-400");
+        title.classList.remove("text-rose-800");
+
+        btn.classList.replace("text-rose-500", "text-green-600");
+        btn.classList.replace("border-rose-200", "border-green-300");
+        btn.classList.add("bg-green-50");
+        btn.classList.add("pointer-events-none"); // Prevent un-checking
+
+        btnText.innerText = "Selesai";
+
+        // Render the check-circle icon
+        btnIcon.outerHTML =
+          '<i data-lucide="check-circle" class="w-3 h-3 text-green-600"></i>';
+        lucide.createIcons(); // Refresh icons
+
+        // Unlock next step
+        let nextStepId = null;
+        if (stepId === "step-1") nextStepId = "step-2";
+        if (stepId === "step-2") nextStepId = "step-3";
+
+        if (nextStepId) {
+          const nextStep = document.getElementById(nextStepId);
+          const nextDot = nextStep.querySelector(".step-dot");
+          const nextBtn = nextStep.querySelector(".btn-action");
+
+          nextDot.classList.replace("bg-gray-300", "bg-rose-400");
+          nextBtn.classList.remove("opacity-50", "pointer-events-none");
+        } else {
+          // If it's the last step (Step 3), fire grand confetti!
+          const end = Date.now() + 2 * 1000;
+          const colors = ["#bb0000", "#ffffff"];
+
+          (function frame() {
+            confetti({
+              particleCount: 5,
+              angle: 60,
+              spread: 55,
+              origin: { x: 0 },
+              colors: colors,
+            });
+            confetti({
+              particleCount: 5,
+              angle: 120,
+              spread: 55,
+              origin: { x: 1 },
+              colors: colors,
+            });
+
+            if (Date.now() < end) {
+              requestAnimationFrame(frame);
+            }
+          })();
+        }
+      }
+    </script>
   </body>
 </html>
